@@ -1,7 +1,12 @@
 -- Define locations: {teleportA = vector4, teleportB = vector4}
-local locations = {
-    {teleportA = vector4(-70.51, -800.39, 44.23, 327.57), teleportB = vector4(-77.52, -826.35, 243.39, 248.25)}, -- Example location 1
-}
+local file = LoadResourceFile(GetCurrentResourceName(), "locations.json")
+local locations = json.decode(file)
+
+-- To use as vector4:
+for _, loc in ipairs(locations) do
+    loc.teleportA = vector4(loc.teleportA.x, loc.teleportA.y, loc.teleportA.z, loc.teleportA.w)
+    loc.teleportB = vector4(loc.teleportB.x, loc.teleportB.y, loc.teleportB.z, loc.teleportB.w)
+end
 
 local teleportDistance = 2.0 -- Distance within which the player can teleport
 local key = 38 -- "E" key
